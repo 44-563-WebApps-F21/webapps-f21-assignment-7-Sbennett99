@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html> <head> <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style>
+<title>
+	A stack of Items
+</title>
+<h1>
+	Seth Bennett builds a stack
+</h1>
+</head>
+
+
+
+<body>
+		<div class="flex-container" id="target">
+		  <div class="stack">row item 1</div>   
+		  <div class="stack">row item 2</div>  
+		  <div class="stack">row item 3</div>  
+		</div>
+	
+	<p> Press the button to create an new element of type div and then add it to the container.
+		</p>
+		
+	
+	
+
+<script>
+	function makeNewDiv(){
+		/* make the div and its text */
+		let element = document.createElement("div")
+		element.innerHTML = document.getElementById("input").value
+		element.style.color = "orange"
+		element.className = "stack"
+
+		/* add it to the container */
+		document.getElementById('target').appendChild(element)
+		
+	}
+	function popItem(){
+		let stackItems = document.getElementsByClassName("stack")
+		if(stackItems.length > 0){
+			stackItems[stackItems.length -1].remove()
+		}
+
+	}
+	function zap(){
+		let stackItems = document.getElementsByClassName("stack")
+		let input = document.getElementById("input").value
+		for(i = 0; i < stackItems.length; i++){
+			if(stackItems[i].innerHTML == input){
+				stackItems[i].remove()
+				console.log("Item removed at "+ i)
+				i--
+			}
+		}
+
+
+	}
+</script>
+<label for="input">Input something to add to the stack</label>
+<input type="text" name="input" id="input">
+<button onclick="makeNewDiv()">Push value</button>
+<button onclick="popItem()">Pop</button>
+<button onclick="zap()">Zap values</button>
+</body>
+</html>	
